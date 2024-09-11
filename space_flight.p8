@@ -93,6 +93,7 @@ end
 
 function move_asteroids()
     for asteroid in all(asteroids) do
+        if flr(rnd(7)) == 0 then generate_particle(asteroid.x, asteroid.y) end
         if asteroid.movement_pattern == 0 then
             asteroid.y += 1
         elseif asteroid.movement_pattern == 1 then
@@ -158,15 +159,20 @@ function handle_asteroid_collisions()
     end
 end
 
+function clr()
+    return flr(rnd(3)) + 8
+end
+
 function generate_particle(x, y)
     particle = {
         x = x,
         y = y,
-        color = flr(rnd(16)),
+        color = clr(),
         frames_remaining = flr(rnd(15)) + 10
     }
     function particle.random_color()
-        particle.color = flr(rnd(4)) + 7
+        particle.color = clr()
+        printh(particle.color)
     end
     add(particles, particle)
 end
@@ -293,6 +299,8 @@ function _draw()
         spr(2, player.x, player.y + 7, 1, 1, player.burner_sprite_flip)
 
         print("score: " .. score.value, 0, 0, 7)
+
+        -- particles
         for particle in all(particles) do
             print(".", particle.x, particle.y, particle.color)
         end
