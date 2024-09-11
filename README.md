@@ -2,6 +2,8 @@
 Game written in Lua for PICO-8 'fantasy' console  
 gfx and sfx created with built-in editors of PICO-8  
   
+![cover](space_flight_minif.png "Game cart")
+
 ### PC Controls  
 arrows, Z, X  
   
