@@ -158,6 +158,29 @@ function handle_asteroid_collisions()
     end
 end
 
+function generate_particle(x, y)
+    particle = {
+        x = x,
+        y = y,
+        color = flr(rnd(16)),
+        frames_remaining = flr(rnd(15)) + 10
+    }
+    function particle.random_color()
+        particle.color = flr(rnd(4)) + 7
+    end
+    add(particles, particle)
+end
+
+function change_particles()
+    for particle in all(particles) do
+        particle.random_color()
+        particle.frames_remaining -= 1
+        particle.x += flr(rnd(5)) - 2
+        particle.y += flr(rnd(3))
+        if particle.frames_remaining <= 0 then del(particles, particle) end
+    end
+end
+
 function TEST_generate_asteroids()
     for i = 1, 10 do
         asteroid = {
@@ -212,6 +235,7 @@ function _init()
 
     bullets = {}
     asteroids = {}
+    particles = {}
 
     menu = true
     music(0)
@@ -225,6 +249,8 @@ function _update60()
         end
     else
         flip_burner()
+        change_particles()
+        generate_particle(player.x + flr(rnd(1)) + 2, player.y + 4)
 
         if btn(0) then player.x -= 1 end
         if btn(1) then player.x += 1 end
@@ -259,14 +285,17 @@ function _draw()
     if menu then
         print("space flight", 40, 64, 8)
         print("hit 🅾️ and ❎ to start", 25, 72, 7)
-        print("use arrows to fly and 🅾️ to shoot", 0, 80)
-        print("avoid asteroids and shoot them", 3, 88)
+        print("use arrows to fly and 🅾️ to shoot", 0, 80, 7)
+        print("avoid asteroids and shoot them", 3, 88, 7)
     else
         -- player and flame
         spr(1, player.x, player.y)
         spr(2, player.x, player.y + 7, 1, 1, player.burner_sprite_flip)
 
-        print("score: " .. score.value)
+        print("score: " .. score.value, 0, 0, 7)
+        for particle in all(particles) do
+            print(".", particle.x, particle.y, particle.color)
+        end
 
         -- draw bullets
         for bullet in all(bullets) do
@@ -288,8 +317,8 @@ function _draw()
             print(
             "destroyed asteroids: " .. score.destroyed_asteroids,
             20, 60, 7)
-            print("best score: " .. current_hightscore, 20, 68)
-            print("most destroyed: " .. current_most_destr, 20, 76)
+            print("best score: " .. current_hightscore, 20, 68, 7)
+            print("most destroyed: " .. current_most_destr, 20, 76, 7)
             if new_highscore then print("NEW HIGHSCORE!", 20, 90, 10) end
             if new_most_destr then print("NEW MOST DESTROYED SCORE!", 17, 95, 10) end
             print("hit 🅾️ and ❎ to restart", 17, 105, 11)
