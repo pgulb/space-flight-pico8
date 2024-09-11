@@ -186,6 +186,24 @@ function change_particles()
     end
 end
 
+function generate_stars()
+    for i=0,(flr(rnd(5)) + 5) do
+        star = {
+            x = flr(rnd(128)),
+            y = flr(rnd(128)),
+            frames_remaining = flr(rnd(10)) + 5
+        }
+        add(stars, star)
+    end
+end
+
+function change_stars()
+    for star in all(stars) do
+        star.frames_remaining -= 1
+        if star.frames_remaining <= 0 then del(stars, star) end
+    end
+end
+
 function TEST_generate_asteroids()
     for i = 1, 10 do
         asteroid = {
@@ -241,12 +259,16 @@ function _init()
     bullets = {}
     asteroids = {}
     particles = {}
+    stars = {}
 
     menu = true
     music(0)
 end
 
 function _update60()
+    change_stars()
+    generate_stars()
+
     if menu then
         if btn(4) and btn(5) then
             music(-1)
@@ -287,6 +309,12 @@ end
 
 function _draw()
     cls()
+
+    -- stars
+    for star in all(stars) do
+        print(".", star.x, star.y, flr(rnd(1)) + 6)
+    end
+
     if menu then
         print("space flight", 40, 64, 8)
         print("hit 🅾️ and ❎ to start", 25, 72, 7)
