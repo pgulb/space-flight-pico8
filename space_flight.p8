@@ -71,10 +71,7 @@ function shoot()
 end
 
 function flip_burner()
-    if player.burner_sprite_flip then
-        player.burner_sprite_flip = false
-    else player.burner_sprite_flip = true
-    end
+    player.burner_sprite_flip = not player.burner_sprite_flip
 end
 
 function score_up()
