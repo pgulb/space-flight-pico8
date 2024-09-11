@@ -218,15 +218,10 @@ function _update60()
         if btn(3) then player.y += 1 end
 
         subtract_bullet_delay()
-
         keep_player_in_screen()
-
         move_asteroids()
-
         dispose_asteroids()
-
         generate_asteroid()
-
         move_bullets()
 
         if btn(4) and bullet_delay == 0 then
@@ -234,9 +229,7 @@ function _update60()
         end
 
         score_up()
-
         handle_bullet_hits()
-
         handle_asteroid_collisions()
 
         if player.hp < 1 then
