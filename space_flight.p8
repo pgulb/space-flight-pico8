@@ -79,7 +79,7 @@ end
 
 function generate_asteroid()
     if player.hp > 0 then
-        if flr(rnd(15)) == 1 then
+        if flr(rnd(9)) == 1 then
             asteroid = {
                 sprite = flr(rnd(6)) + 4,
                 x = flr(rnd(119)),
@@ -172,7 +172,6 @@ function generate_particle(x, y)
     }
     function particle.random_color()
         particle.color = clr()
-        printh(particle.color)
     end
     add(particles, particle)
 end
@@ -218,7 +217,7 @@ end
 
 function _init()
 --    TEST_generate_asteroids()
-    cartdata("pgulb_space_flight_bestscores_v1")
+    cartdata("pgulb_space_flight_bestscores")
     current_hightscore = dget(0)
     current_most_destr = dget(1)
     new_highscore = false
