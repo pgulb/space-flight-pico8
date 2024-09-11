@@ -2,30 +2,6 @@ pico-8 cartridge // http://www.pico-8.com
 version 41
 __lua__
 
--- initial values
-
-player = {
-    x = 60,
-    y = 80,
-    hp = 3,
-    burner_sprite_flip = true
-}
-
-score = {
-    counter = 0,
-    value = 0,
-    destroyed_asteroids = 0
-}
-
-bullet_delay = 0
-
-bullets = {}
-asteroids = {}
-
-menu = true
-
--- end of initial values
-
 -- utility functions
 
 function keep_player_in_screen()
@@ -205,6 +181,25 @@ end
 
 function _init()
 --    TEST_generate_asteroids()
+    player = {
+        x = 60,
+        y = 80,
+        hp = 3,
+        burner_sprite_flip = true
+    }
+
+    score = {
+        counter = 0,
+        value = 0,
+        destroyed_asteroids = 0
+    }
+
+    bullet_delay = 0
+
+    bullets = {}
+    asteroids = {}
+
+    menu = true
     music(0)
 end
 
