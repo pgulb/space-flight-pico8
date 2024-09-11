@@ -7,3 +7,7 @@ arrows, Z, X
 
 ### Implementation  
 https://www.lexaloffle.com/bbs/?tid=52357
+
+### Development
+shrinko8 is used to minify the cart - https://github.com/thisismypassport/shrinko8
+Taskfile provides commands for minifying and running cart - https://taskfile.dev/installation/

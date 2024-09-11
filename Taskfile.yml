@@ -1,0 +1,15 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task --list-all
+  m:
+    desc: minify cart and create minified PNG
+    cmds:
+      - python3 shrinko8/shrinko8.py space_flight.p8 space_flight_minif.p8 --minify
+      - python3 shrinko8/shrinko8.py space_flight.p8 space_flight_minif.png --minify
+  r:
+    desc: run PNG with pico8
+    cmds:
+      - pico8 space_flight_minif.png
