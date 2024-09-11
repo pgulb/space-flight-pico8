@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    "**/shrinko8": true,
+  },
+  "search.exclude": {
+    "**/shrinko8": true,
+  },
+  "files.watcherExclude": {
+    "**/shrinko8": true,
+  }
+}
