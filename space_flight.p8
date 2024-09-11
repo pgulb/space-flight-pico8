@@ -29,7 +29,7 @@ end
 
 function move_bullets()
     for bullet in all(bullets) do
-        bullet.y -= 4
+        bullet.y -= 2
         if bullet.y < 0 then del(bullets, bullet) end
     end
 end
@@ -42,7 +42,7 @@ function shoot()
             y = player.y - 9
         }
         add(bullets, bullet)
-        bullet_delay = 15
+        bullet_delay = 30
     end
 end
 
@@ -53,7 +53,7 @@ end
 function score_up()
     if player.hp > 0 then
         score.counter += 1
-        if score.counter > 9 then
+        if score.counter > 19 then
             score.counter = 0
             score.value += 1
         end 
@@ -71,7 +71,7 @@ end
 
 function generate_asteroid()
     if player.hp > 0 then
-        if flr(rnd(7)) == 1 then
+        if flr(rnd(15)) == 1 then
             asteroid = {
                 sprite = flr(rnd(6)) + 4,
                 x = flr(rnd(119)),
@@ -88,9 +88,9 @@ function move_asteroids()
         if asteroid.movement_pattern == 0 then
             asteroid.y += 1
         elseif asteroid.movement_pattern == 1 then
-            asteroid.y += 3
+            asteroid.y += 2
         elseif asteroid.movement_pattern == 2 then
-            asteroid.y += 5
+            asteroid.y += 3
         elseif asteroid.movement_pattern == 3 then
             asteroid.y += 2
             if asteroid.y > 0 then
@@ -203,7 +203,7 @@ function _init()
     music(0)
 end
 
-function _update()
+function _update60()
     if menu then
         if btn(4) and btn(5) then
             music(-1)
@@ -212,10 +212,10 @@ function _update()
     else
         flip_burner()
 
-        if btn(0) then player.x -= 2 end
-        if btn(1) then player.x += 2 end
-        if btn(2) then player.y -= 2 end
-        if btn(3) then player.y += 2 end
+        if btn(0) then player.x -= 1 end
+        if btn(1) then player.x += 1 end
+        if btn(2) then player.y -= 1 end
+        if btn(3) then player.y += 1 end
 
         subtract_bullet_delay()
 
