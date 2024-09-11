@@ -66,6 +66,14 @@ function handle_player_death()
         player.y = 99999
         music(-1)
         sfx(2)
+        if score.value > current_hightscore then
+            dset(0, score.value)
+            new_highscore = true
+        end
+        if score.destroyed_asteroids > current_most_destr then
+            dset(1, score.destroyed_asteroids)
+            new_most_destr = true
+        end
     end
 end
 
@@ -181,6 +189,12 @@ end
 
 function _init()
 --    TEST_generate_asteroids()
+    cartdata("pgulb_space_flight_bestscores_v1")
+    current_hightscore = dget(0)
+    current_most_destr = dget(1)
+    new_highscore = false
+    new_most_destr = false
+
     player = {
         x = 60,
         y = 80,
@@ -270,11 +284,15 @@ function _draw()
         end
 
         if player.hp < 1 then
-            print("game over", 45, 64, 8)
+            print("game over", 45, 44, 8)
             print(
             "destroyed asteroids: " .. score.destroyed_asteroids,
-            20, 70, 7)
-            print("hit 🅾️ and ❎ to restart", 17, 80)
+            20, 60, 7)
+            print("best score: " .. current_hightscore, 20, 68)
+            print("most destroyed: " .. current_most_destr, 20, 76)
+            if new_highscore then print("NEW HIGHSCORE!", 20, 90, 10) end
+            if new_most_destr then print("NEW MOST DESTROYED SCORE!", 17, 95, 10) end
+            print("hit 🅾️ and ❎ to restart", 17, 105, 11)
         end
     end
 end
