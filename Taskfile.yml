@@ -13,3 +13,7 @@ tasks:
     desc: run PNG with pico8
     cmds:
       - pico8 space_flight_minif.png
+  e:
+    desc: edit unminified cart with pico8 editor (for sprites and music)
+    cmds:
+      - pico8 space_flight.p8
